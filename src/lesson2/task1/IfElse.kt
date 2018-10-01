@@ -71,7 +71,6 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
             age % 10 == 1 -> "$age год"
             age % 10 in 2..4 -> "$age года"
             age % 10 >= 0 -> "$age лет"
-
             else -> "Введите возраст, удовлетворяющий промежутку"
         }
 
@@ -90,9 +89,11 @@ fun timeForHalfWay(t1: Double, v1: Double,
     val s2 = t2 * v2
     val s3 = t3 * v3
     val s = (s1 + s2 + s3) / 2
-    if (s <= s1) return s / v1 else
-        if (s <= s1 + s2) return t1 + (s - s1) / v2 else
-            return t1 + t2 + (s - s1 - s2) / v3
+    return when {
+        (s <= s1) -> s / v1
+        (s <= s1 + s2) -> t1 + (s - s1) / v2
+        else -> t1 + t2 + (s - s1 - s2) / v3
+    }
 }
 
 
@@ -118,11 +119,8 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
                     (kingX == rookX2 || kingY == rookY2) -> 3
             (kingX == rookX1 || kingY == rookY1) -> 1
             (kingX == rookX2 || kingY == rookY2) -> 2
-
             else -> 0
-
-
-}
+        }
 
 /**
  * Простая
@@ -159,10 +157,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     val cosa = (b * b + c * c - a * a) / 2.0 * b * c
     val cosb = (a * a + c * c - b * b) / 2.0 * a * c
     val cosc = (a * a + b * b - c * c) / 2.0 * a * b
-    return if (a + b < c || a + c < b || b + c < a) return -1 else
-        if (cosa == 0.0 || cosb == 0.0 || cosc == 0.0) return 1 else
-            if (cosa < 0.0 || cosb < 0.0 || cosc < 0.0) return 2 else 0
-
+    return when { (a + b < c || a + c < b || b + c < a) -> -1
+        (cosa == 0.0 || cosb == 0.0 || cosc == 0.0) -> 1
+        (cosa < 0.0 || cosb < 0.0 || cosc < 0.0) -> 2
+        else -> 0
+    }
 }
 
 /**
@@ -173,14 +172,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int=
         when {
-            (c in a..b && b <= d) -> b - c
-            (a in c..d && d <= b) -> d - a
-            (c in a..d && d <= b) -> d - c
-            (a in c..b && b <= d) -> b - a
+            (max(c, b) == b) && (min(c, a) == a) && (min(b, d) == b) -> b - c
+            (max(a, d) == d) && (min(a, c) == c) && (min(d, b) == d) -> d - a
+            (max(c, d) == d) && (min(c, a) == a) && (min(d, b) == d) -> d - c
+            (max(a, b) == b) && (min(a, c) == c) && (min(b, d) == b) -> b - a
             else -> -1
-
         }
 
 
