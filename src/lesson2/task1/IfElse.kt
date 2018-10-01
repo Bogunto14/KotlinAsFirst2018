@@ -102,6 +102,7 @@ fun timeForHalfWay(t1: Double, v1: Double,
 
 
 
+
 /**
  * Простая
  *
@@ -157,7 +158,8 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     val cosa = (b * b + c * c - a * a) / 2.0 * b * c
     val cosb = (a * a + c * c - b * b) / 2.0 * a * c
     val cosc = (a * a + b * b - c * c) / 2.0 * a * b
-    return when { (a + b < c || a + c < b || b + c < a) -> -1
+    return when {
+        (a + b < c || a + c < b || b + c < a) -> -1
         (cosa == 0.0 || cosb == 0.0 || cosc == 0.0) -> 1
         (cosa < 0.0 || cosb < 0.0 || cosc < 0.0) -> 2
         else -> 0
@@ -172,12 +174,9 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int=
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
         when {
-            (max(c, b) == b) && (min(c, a) == a) && (min(b, d) == b) -> b - c
-            (max(a, d) == d) && (min(a, c) == c) && (min(d, b) == d) -> d - a
-            (max(c, d) == d) && (min(c, a) == a) && (min(d, b) == d) -> d - c
-            (max(a, b) == b) && (min(a, c) == c) && (min(b, d) == b) -> b - a
+            (min(b, d) >= max(a, c)) -> (min(b, d) - max(a, c))
             else -> -1
         }
 
