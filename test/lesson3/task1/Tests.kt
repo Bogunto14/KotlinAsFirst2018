@@ -50,6 +50,7 @@ class Tests {
         assertFalse(isPerfect(100))
     }
 
+
     @Test
     @Tag("Example")
     fun digitCountInNumber() {
