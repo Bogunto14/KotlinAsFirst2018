@@ -110,7 +110,7 @@ fun fib(n: Int): Int {
 fun lcm(m: Int, n: Int): Int {
     var a = max(m, n)
     while (a % m != a % n) {
-        a++
+        a += max(m, n)
     }
     return a
 }
