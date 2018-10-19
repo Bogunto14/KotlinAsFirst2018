@@ -2,6 +2,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import java.lang.Math.abs
 import java.lang.Math.pow
 import kotlin.math.max
 import kotlin.math.sqrt
@@ -70,17 +71,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var numberofdigits = 0
-    var number = n
+    var numberOfDigits = 0
+    var number = abs(n)
     if (number == 0) return 1
     else while (number > 0) {
-        numberofdigits++
+        numberOfDigits++
         number /= 10
     }
-    return numberofdigits
+    return numberOfDigits
+
 }
-
-
 
 /**
  * Простая
