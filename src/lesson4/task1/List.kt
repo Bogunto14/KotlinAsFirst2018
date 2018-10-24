@@ -125,10 +125,10 @@ fun abs(v: List<Double>): Double =
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double {
-    return if (list.isEmpty()) 0.0
-    else (list.sum() / list.size)
-}
+fun mean(list: List<Double>): Double =
+        if (list.isEmpty()) 0.0
+        else (list.sum() / list.size)
+
 
 /**
  * Средняя
@@ -145,9 +145,6 @@ fun center(list: MutableList<Double>): MutableList<Double> {
     }
     return list
 }
-
-
-
 
 /**
  * Средняя
@@ -239,7 +236,6 @@ fun factorizeToString(n: Int): String =
 fun convert(n: Int, base: Int): List<Int> {
     val result = mutableListOf<Int>()
     var number = n
-    if (number == 0) result.add(0)
     while (number > 0) {
         result.add(number % base)
         number /= base
@@ -256,8 +252,9 @@ fun convert(n: Int, base: Int): List<Int> {
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String =
-        convert(n, base).joinToString(separator = "") { it.toString(36) }
+fun convertToString(n: Int, base: Int): String = (n).toString(base)
+
+
 
 /**
  * Средняя
