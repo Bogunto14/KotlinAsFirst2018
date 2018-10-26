@@ -119,7 +119,6 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
 fun abs(v: List<Double>): Double =
         sqrt(v.map { it * it }.sum())
 
-
 /**
  * Простая
  *
@@ -128,7 +127,6 @@ fun abs(v: List<Double>): Double =
 fun mean(list: List<Double>): Double =
         if (list.isEmpty()) 0.0
         else (list.sum() / list.size)
-
 
 /**
  * Средняя
@@ -243,7 +241,6 @@ fun convert(n: Int, base: Int): List<Int> {
     return result.reversed()
 }
 
-
 /**
  * Сложная
  *
@@ -254,8 +251,6 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String = (n).toString(base)
 
-
-
 /**
  * Средняя
  *
@@ -264,6 +259,7 @@ fun convertToString(n: Int, base: Int): String = (n).toString(base)
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
 fun decimal(digits: List<Int>, base: Int): Int = TODO()
+
 /**
  * Сложная
  *
