@@ -2,9 +2,6 @@
 
 package lesson5.task1
 
-import lesson4.task1.mean
-import kotlin.math.absoluteValue
-
 /**
  * Пример
  *
@@ -200,10 +197,11 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): {
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit {
     for ((k, v) in b)
         if (a[k] == v) a.remove(k)
 }
+
 
 /**
  * Простая
@@ -266,10 +264,9 @@ fun hasAnagrams(words: List<String>): Boolean = words.map { it.toList().sorted()
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    val n = number
     for (i in 0 until list.size) {
         for (j in i + 1 until list.size)
-            if (n == list[i].plus(list[j]))
+            if (number == list[i].plus(list[j]))
                 return Pair(i, j)
     }
     return Pair(-1, -1)
