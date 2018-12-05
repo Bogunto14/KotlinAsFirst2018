@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import lesson4.task1.mean
+
 /**
  * Пример
  *
@@ -122,7 +124,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> =
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = b.plus(a) == b
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = b + a == b
 
 /**
  * Средняя
@@ -134,10 +136,8 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = b.plus
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun average(list: List<Double>): Double = list.sum() / list.size
-
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> =
-        stockPrices.groupBy({ it.first }, { it.second }).mapValues { average(it.value) }
+        stockPrices.groupBy({ it.first }, { it.second }).mapValues { mean(it.value ) }
 
 /**
  * Средняя
@@ -264,10 +264,11 @@ fun hasAnagrams(words: List<String>): Boolean = words.map { it.toList().sorted()
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    for (i in 0 until list.size) {
-        for (j in i + 1 until list.size)
-            if (number == list[i].plus(list[j]))
-                return Pair(i, j)
+    val map = mutableMapOf<Int, Int>()
+    for (i in list) {
+        val key = number - list[i]
+        if (key in map) return map[key]!! to i
+        else map[list[i]] = i
     }
     return Pair(-1, -1)
 }
