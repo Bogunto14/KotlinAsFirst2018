@@ -235,7 +235,7 @@ fun convert(n: Int, base: Int): List<Int> {
     val result = mutableListOf<Int>()
     if(n == 0) result.add(0)
     var number = n
-    while (number != 0) {
+    while (number > 0) {
         result.add(number % base)
         number /= base
     }
