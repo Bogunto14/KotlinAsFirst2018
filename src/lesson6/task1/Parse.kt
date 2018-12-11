@@ -145,7 +145,7 @@ fun flattenPhoneNumber(phone: String): String {
  */
 fun bestLongJump(jumps: String): Int {
     return try {
-        if (!Regex("""[-\s\d%]*""").matches(jumps)) throw Exception()
+        if (!Regex("""[-\s\d%]+""").matches(jumps)) throw Exception()
         val parts = jumps.split(" ")
         parts.max()!!.toInt()
     } catch (e: Exception) {
@@ -164,7 +164,7 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    if (!Regex("""[-\d\s+%]*""").matches(jumps)) return -1
+    if (!Regex("""[-\d\s+%]+""").matches(jumps)) return -1
     val result = mutableListOf<Int>()
     val parts = jumps.split(" ")
     for (i in 0 until parts.size) {
@@ -234,7 +234,7 @@ fun mostExpensive(description: String): String {
     val parts = description.split("; ")
     val result = mutableListOf<Double>()
     var res = ""
-    var max: Double
+    val max: Double
     for (i in 0 until parts.size) {
         val wordsNumber = parts[i].split(" ")
         for (j in 1 until wordsNumber.size) {
@@ -242,11 +242,10 @@ fun mostExpensive(description: String): String {
         }
     }
     max = result.maxBy { it }!!
-    println(max)
     for (i in 0 until parts.size) {
         val wordsNumber = parts[i].split(" ")
         for (j in 1 until wordsNumber.size) {
-            if (wordsNumber[j] == max.toString()) res = wordsNumber[j - 1]
+            if (wordsNumber[j].toDouble() == max) res = wordsNumber[j - 1]
         }
     }
     return res
