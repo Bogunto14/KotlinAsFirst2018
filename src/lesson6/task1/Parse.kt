@@ -81,7 +81,7 @@ fun dateStrToDigit(str: String): String {
         val day = parts[0].toInt()
         val month = months.indexOf(parts[1]) + 1
         val year = parts[2].toInt()
-        if (day > daysInMonth(month, year) || month == 0) throw Exception()
+        if (day > daysInMonth(month, year) || day == 0 || month == 0) throw Exception()
         else return String.format("%02d.%02d.%d", day, month, year)
     } catch (e: Exception) {
         ""
@@ -129,7 +129,7 @@ fun dateDigitToStr(digital: String): String {
  * При неверном формате вернуть пустую строку
  */
 fun flattenPhoneNumber(phone: String): String {
-    if (!Regex("""([+7])?(\d).*([\s-]).*(\(\d{3}\))?""").matches(phone)) return ""
+    if (!Regex("""([+7])?(\d).*([\s-]).*(\(\d{3}\))?[^a-zA-Z]""").matches(phone)) return ""
     return (Regex("""[\s()-]""").replace(phone, ""))
 }
 
@@ -144,13 +144,15 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    return try {
-        if (!Regex("""[-\s\d%]+""").matches(jumps)) throw Exception()
-        val parts = jumps.split(" ")
-        parts.max()!!.toInt()
-    } catch (e: Exception) {
-        -1
+    if (!Regex("""[-\s\d%]+""").matches(jumps)) return -1
+    val parts = jumps.split(" ")
+    var max = -1
+    for (jump in parts) {
+        if (Regex("""[\d]+""").matches(jump)) {
+            if (jump.toInt() > max) max = jump.toInt()
+        }
     }
+    return max
 }
 
 /**
@@ -171,7 +173,7 @@ fun bestHighJump(jumps: String): Int {
         if ("+" in parts[i]) result.add(parts[i - 1].toInt())
     }
     if (result.size == 0) return -1
-    return result.max()!!.toInt()
+    return result.max()!!
 }
 
 /**
@@ -209,10 +211,10 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int {
-    val parts = str.split(" ")
+    val parts = str.toLowerCase().split(" ")
     var index = 0
     for (i in 0 until parts.size - 1) {
-        if (parts[i].toLowerCase() == parts[i + 1].toLowerCase())
+        if (parts[i] == parts[i + 1])
             return index
         index += parts[i].length + 1
     }
@@ -235,14 +237,14 @@ fun mostExpensive(description: String): String {
     val parts = description.split("; ")
     val result = mutableListOf<Double>()
     var res = ""
-    val max: Double
+    var max = 0.0
     for (i in 0 until parts.size) {
         val wordsNumber = parts[i].split(" ")
         for (j in 1 until wordsNumber.size) {
             result.add(wordsNumber[j].toDouble())
+            max = result.maxBy { it }!!
         }
     }
-    max = result.maxBy { it }!!
     for (i in 0 until parts.size) {
         val wordsNumber = parts[i].split(" ")
         for (j in 1 until wordsNumber.size) {
