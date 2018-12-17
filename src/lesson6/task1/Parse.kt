@@ -129,12 +129,12 @@ fun dateDigitToStr(digital: String): String {
  * При неверном формате вернуть пустую строку
  */
 fun flattenPhoneNumber(phone: String): String {
-    if (!Regex("""[^a-zA-Z]([+7])?(\d).*([\s-]).*(\(\d{3}\))?""").matches(phone)) return ""
+    if (!Regex("""([+7])?(\d)*([\s-]).*(\(\d{3}\))?""").matches(phone)) return ""
     return (Regex("""[\s()-]""").replace(phone, ""))
 }
 
 /**
- * Средняя
+ * Средняя8P'%G GQU>\tW`T)nyH\\0
  *
  * Результаты спортсмена на соревнованиях в прыжках в длину представлены строкой вида
  * "706 - % 717 % 703".
