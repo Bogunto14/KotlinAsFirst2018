@@ -137,7 +137,7 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = b + a 
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> =
-        stockPrices.groupBy({ it.first }, { it.second }).mapValues { mean(it.value ) }
+        stockPrices.groupBy({ it.first }, { it.second }).mapValues { mean(it.value) }
 
 /**
  * Средняя
@@ -219,7 +219,7 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.intersect(b
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean = chars.containsAll(word.toList())
+fun canBuildFrom(chars: List<Char>, word: String): Boolean = chars.containsAll(word.toLowerCase().toList())
 
 /**
  * Средняя

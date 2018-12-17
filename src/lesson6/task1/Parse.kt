@@ -81,7 +81,7 @@ fun dateStrToDigit(str: String): String {
         val day = parts[0].toInt()
         val month = months.indexOf(parts[1]) + 1
         val year = parts[2].toInt()
-        if (day > daysInMonth(month, year) || day == 0 || month == 0) throw Exception()
+        if (day !in 1..daysInMonth(month, year) || month == 0) throw Exception()
         else return String.format("%02d.%02d.%d", day, month, year)
     } catch (e: Exception) {
         ""
@@ -235,20 +235,15 @@ fun firstDuplicateIndex(str: String): Int {
 fun mostExpensive(description: String): String {
     if (description == "") return ""
     val parts = description.split("; ")
-    val result = mutableListOf<Double>()
     var res = ""
-    var max = 0.0
+    var max = -1.0
     for (i in 0 until parts.size) {
         val wordsNumber = parts[i].split(" ")
         for (j in 1 until wordsNumber.size) {
-            result.add(wordsNumber[j].toDouble())
-            max = result.maxBy { it }!!
-        }
-    }
-    for (i in 0 until parts.size) {
-        val wordsNumber = parts[i].split(" ")
-        for (j in 1 until wordsNumber.size) {
-            if (wordsNumber[j].toDouble() == max) res = wordsNumber[j - 1]
+            if (wordsNumber[j].toDouble() > max) {
+                max = wordsNumber[j].toDouble()
+                res = wordsNumber[j - 1]
+            }
         }
     }
     return res
