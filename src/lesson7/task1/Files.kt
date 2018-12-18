@@ -98,7 +98,7 @@ fun centerFile(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var longest = 0
     for (line in File(inputName).readLines()) {
-        if (line.trim().length > longest) longest = line.length
+        if (line.trim().length > longest) longest = line.trim().length
     }
     for (line in File(inputName).readLines()) {
         val spaces = (longest - line.trim().length) / 2
