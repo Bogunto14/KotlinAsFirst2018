@@ -95,15 +95,17 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
+    val list = mutableListOf<String>()
     val writer = File(outputName).bufferedWriter()
     var longest = 0
     for (line in File(inputName).readLines()) {
+        list += line.trim()
         if (line.trim().length > longest) longest = line.trim().length
     }
-    for (line in File(inputName).readLines()) {
-        val spaces = (longest - line.trim().length) / 2
+    for (line in list) {
+        val spaces = (longest - line.length) / 2
         writer.write("".padStart(spaces, ' '))
-        writer.write(line.trim())
+        writer.write(line)
         writer.newLine()
     }
 
@@ -131,7 +133,7 @@ fun centerFile(inputName: String, outputName: String) {
  * 6) Число пробелов между более левой парой соседних слов должно быть больше или равно числу пробелов
  *    между более правой парой соседних слов.
  *
- * Следует учесть, что входной файл может содержать последовательности из нескольких пробелов  между слвоами. Такие
+ * Следует учесть, что входной файл может содержать последовательности из нескольких пробелов  между словами. Такие
  * последовательности следует учитывать при выравнивании и при необходимости избавляться от лишних пробелов.
  * Из этого следуют следующие правила:
  * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
